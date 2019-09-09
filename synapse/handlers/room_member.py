@@ -30,10 +30,10 @@ from synapse import types
 from synapse.api.constants import EventTypes, Membership
 from synapse.api.errors import AuthError, Codes, HttpResponseException, SynapseError
 from synapse.handlers.identity import LookupAlgorithm
+from synapse.http.client import SimpleHttpClient
 from synapse.types import RoomID, UserID
 from synapse.util.async_helpers import Linearizer
 from synapse.util.distributor import user_joined_room, user_left_room
-from synapse.http.client import SimpleHttpClient
 from synapse.util.hash import sha256_and_url_safe_base64
 
 from ._base import BaseHandler

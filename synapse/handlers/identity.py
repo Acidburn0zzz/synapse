@@ -29,8 +29,8 @@ from synapse.api.errors import (
     HttpResponseException,
     SynapseError,
 )
-from synapse.util.stringutils import random_string
 from synapse.http.client import SimpleHttpClient
+from synapse.util.stringutils import random_string
 
 from ._base import BaseHandler
 
