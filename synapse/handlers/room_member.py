@@ -33,6 +33,7 @@ from synapse.handlers.identity import LookupAlgorithm
 from synapse.types import RoomID, UserID
 from synapse.util.async_helpers import Linearizer
 from synapse.util.distributor import user_joined_room, user_left_room
+from synapse.http.client import SimpleHttpClient
 from synapse.util.hash import sha256_and_url_safe_base64
 
 from ._base import BaseHandler
@@ -61,7 +62,9 @@ class RoomMemberHandler(object):
         self.auth = hs.get_auth()
         self.state_handler = hs.get_state_handler()
         self.config = hs.config
-        self.simple_http_client = hs.get_simple_http_client()
+        self.simple_http_client = SimpleHttpClient(
+            hs, ip_blacklist=hs.config.federation_ip_range_blacklist
+        )
 
         self.federation_handler = hs.get_handlers().federation_handler
         self.directory_handler = hs.get_handlers().directory_handler

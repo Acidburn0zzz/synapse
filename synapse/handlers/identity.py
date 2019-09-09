@@ -30,6 +30,7 @@ from synapse.api.errors import (
     SynapseError,
 )
 from synapse.util.stringutils import random_string
+from synapse.http.client import SimpleHttpClient
 
 from ._base import BaseHandler
 
@@ -40,7 +41,9 @@ class IdentityHandler(BaseHandler):
     def __init__(self, hs):
         super(IdentityHandler, self).__init__(hs)
 
-        self.http_client = hs.get_simple_http_client()
+        self.http_client = SimpleHttpClient(
+            hs, ip_blacklist=hs.config.federation_ip_range_blacklist
+        )
         self.federation_http_client = hs.get_http_client()
         self.hs = hs
 
